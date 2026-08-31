@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <title>KAYG CPA</title>
+    <!--
+      Fix de roteamento para GitHub Pages (SPA fallback).
+      O GitHub Pages não suporta roteamento client-side nativamente: ao dar
+      F5 em uma rota interna (ex: /extrato), o servidor procura por um
+      arquivo físico e retorna 404. Este script redireciona o caminho
+      solicitado de volta para o index.html, preservando a rota via
+      querystring, para que o Next.js Router assuma a partir daí.
+
+      Baseado na técnica popular de spa-github-pages (rafgraph).
+    -->
+    <script>
+      (function () {
+        var segmentCount = 1; // ajuste se o repo estiver em subpasta mais profunda
+        var l = window.location;
+        var basePath = l.pathname
+          .split('/')
+          .slice(0, 1 + segmentCount)
+          .join('/');
+
+        l.replace(
+          l.protocol +
+            '//' +
+            l.hostname +
+            (l.port ? ':' + l.port : '') +
+            basePath +
+            '/?redirect=' +
+            encodeURIComponent(l.pathname.slice(basePath.length) + l.search + l.hash),
+        );
+      })();
+    </script>
+  </head>
+  <body></body>
+</html>
